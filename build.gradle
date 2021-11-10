@@ -30,10 +30,6 @@ dependencies {
     runtimeOnly 'org.postgresql:postgresql'
     testRuntimeOnly 'com.h2database:h2'
 
-    // Redis
-    implementation 'org.springframework.data:spring-data-redis'
-    implementation 'io.lettuce:lettuce-core:6.1.5.RELEASE'
-
 }
 
 jar {

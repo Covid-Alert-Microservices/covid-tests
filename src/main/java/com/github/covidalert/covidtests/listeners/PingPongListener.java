@@ -1,4 +1,4 @@
-package com.github.covidalert.microservicetemplate.listeners;
+package com.github.covidalert.covidtests.listeners;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;

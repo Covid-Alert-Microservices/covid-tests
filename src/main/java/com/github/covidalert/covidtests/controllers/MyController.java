@@ -1,10 +1,9 @@
-package com.github.covidalert.microservicetemplate.controllers;
+package com.github.covidalert.covidtests.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.security.RolesAllowed;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;

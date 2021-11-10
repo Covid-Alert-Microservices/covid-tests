@@ -1,4 +1,4 @@
-package com.github.covidalert.microservicetemplate;
+package com.github.covidalert.covidtests;
 
 import org.apache.kafka.clients.admin.NewTopic;
 import org.apache.kafka.common.config.TopicConfig;

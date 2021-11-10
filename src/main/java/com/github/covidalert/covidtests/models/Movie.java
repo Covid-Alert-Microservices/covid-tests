@@ -1,4 +1,4 @@
-package com.github.covidalert.microservicetemplate.models;
+package com.github.covidalert.covidtests.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
