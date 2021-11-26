@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
-@RequestMapping("/api/covid-test")
+@RequestMapping("/api/covid-tests")
 public class CovidTestsController
 {
 
@@ -26,9 +28,9 @@ public class CovidTestsController
     private CovidTestsRepository covidTestsRepository;
 
     @GetMapping
-    public CovidTest getCovidTest(Principal principal)
+    public List<CovidTest> getAllCovidTests(Principal principal)
     {
-        return covidTestsRepository.getById(principal.getName());
+        return covidTestsRepository.findAllByUserId(principal.getName());
     }
 
     @PostMapping
@@ -55,16 +57,25 @@ public class CovidTestsController
         return covidTestsRepository.saveAndFlush(covidTest);
     }
 
-    @DeleteMapping
-    public void deleteCovidTest(Principal principal)
+    @GetMapping("{id}")
+    public CovidTest getCovidTest(@PathVariable Long id, Principal principal)
     {
-        covidTestsRepository.deleteById(principal.getName());
+        return covidTestsRepository.findByIdAndUserId(id, principal.getName());
     }
 
-    @PutMapping
-    public CovidTest updateCovidTest(Principal principal, @Valid @RequestBody UpdateCovidTestDTO covidTestDTO)
+    @DeleteMapping("{id}")
+    public void deleteCovidTest(@PathVariable Long id, Principal principal)
     {
-        CovidTest existingCovidTest = covidTestsRepository.getById(principal.getName());
+        if (covidTestsRepository.deleteByIdAndUserId(id, principal.getName()) < 1)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("{id}")
+    public CovidTest updateCovidTest(@PathVariable Long id, Principal principal, @Valid @RequestBody UpdateCovidTestDTO covidTestDTO)
+    {
+        CovidTest existingCovidTest = covidTestsRepository.findByIdAndUserId(id, principal.getName());
         BeanUtils.copyProperties(covidTestDTO, existingCovidTest);
 
         if (covidTestDTO.getTestResult().equals("POSITIVE"))
