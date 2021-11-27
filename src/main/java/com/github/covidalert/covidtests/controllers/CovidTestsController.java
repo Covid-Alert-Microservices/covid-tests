@@ -62,7 +62,8 @@ public class CovidTestsController
     {
         CovidTest covidTest = covidTestsRepository.findByIdAndUserId(id, principal.getName());
 
-        if (covidTest == null) {
+        if (covidTest == null)
+        {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
