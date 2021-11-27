@@ -60,10 +60,17 @@ public class CovidTestsController
     @GetMapping("{id}")
     public CovidTest getCovidTest(@PathVariable Long id, Principal principal)
     {
-        return covidTestsRepository.findByIdAndUserId(id, principal.getName());
+        CovidTest covidTest = covidTestsRepository.findByIdAndUserId(id, principal.getName());
+
+        if (covidTest == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+
+        return covidTest;
     }
 
     @DeleteMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCovidTest(@PathVariable Long id, Principal principal)
     {
         if (covidTestsRepository.deleteByIdAndUserId(id, principal.getName()) < 1)
@@ -76,6 +83,12 @@ public class CovidTestsController
     public CovidTest updateCovidTest(@PathVariable Long id, Principal principal, @Valid @RequestBody UpdateCovidTestDTO covidTestDTO)
     {
         CovidTest existingCovidTest = covidTestsRepository.findByIdAndUserId(id, principal.getName());
+
+        if (existingCovidTest == null)
+        {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
         BeanUtils.copyProperties(covidTestDTO, existingCovidTest);
 
         if (covidTestDTO.getTestResult().equals("POSITIVE"))
