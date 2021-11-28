@@ -1,4 +1,4 @@
-# Covid Tests [![Build](https://github.com/Covid-Alert-Microservices/covid-tests/actions/workflows/build.yaml/badge.svg)](https://github.com/Covid-Alert-Microservices/covid-tests/actions/workflows/build.yaml)
+# Covid Tests [![Build](https://github.com/Covid-Alert-Microservices/covid-tests/actions/workflows/build.yaml/badge.svg)](https://github.com/Covid-Alert-Microservices/covid-tests/actions/workflows/build.yaml) [![codecov](https://codecov.io/gh/Covid-Alert-Microservices/covid-tests/branch/master/graph/badge.svg?token=M3BQVEPCHE)](https://codecov.io/gh/Covid-Alert-Microservices/covid-tests)
 
 This repository manages covid tests for Covid-Alert
 
