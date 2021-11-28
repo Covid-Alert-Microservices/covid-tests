@@ -15,7 +15,7 @@ public class CovidTest
 {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private long id;
 
     @NotNull
